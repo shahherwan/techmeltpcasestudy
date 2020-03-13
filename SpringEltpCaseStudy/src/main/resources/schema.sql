@@ -7,5 +7,5 @@ CREATE TABLE EMPLOYEES (
   email VARCHAR(50) DEFAULT NULL,
   role VARCHAR(20) DEFAULT 'non-admin',
   username VARCHAR(20) NOT NULL UNIQUE,
-  password VARCHAR(12) NOT NULL
+  password VARCHAR(60) NOT NULL
 );
