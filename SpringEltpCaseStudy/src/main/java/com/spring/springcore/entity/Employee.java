@@ -23,7 +23,7 @@ public class Employee {
 
 	@Column(name = "email")
 	private String email;
-
+	
 	public Employee() {
 		super();
 	}
