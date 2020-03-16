@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Employee Management System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+<!-- Font Awesoome Icons-->
+<link
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+	rel="stylesheet">
+
+<style>
+i {
+	margin-right: 5px;
+}
+</style>
+<script>
+	// Disable form submissions if there are invalid fields
+	(function() {
+		'use strict';
+		window.addEventListener('load', function() {
+			// Get the forms we want to add validation styles to
+			var forms = document.getElementsByClassName('needs-validation');
+			// Loop over them and prevent submission
+			var validation = Array.prototype.filter.call(forms, function(form) {
+				form.addEventListener('submit', function(event) {
+					if (form.checkValidity() === false) {
+						event.preventDefault();
+						event.stopPropagation();
+					}
+					form.classList.add('was-validated');
+				}, false);
+			});
+		}, false);
+	})();
+</script>
+</head>
+
+<body>
+	<div class="container my-2">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand" href="#">Employee Management</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarText" aria-controls="navbarText"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarText">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><a class="nav-link" href="#">Home
+							<span class="sr-only">(current)</span>
+					</a></li>
+					<li class="nav-item active"><a class="nav-link" href="#">About</a>
+					</li>
+				</ul>
+				<span class="navbar-text" th:text="${loggedInAs}"></span> <span
+					class="navbar-text"> <a href="#loginModal"
+					data-toggle="modal"><i class="fa fa-sign-in"></i>Login</a>
+				</span>
+			</div>
+		</nav>
+
+		<!-- Default form login -->
+		<div class="card shadow-lg">
+			<div class="card-body">
+
+				<form class="form-signin text-center border border-light p-5 needs-validation" method="post" action="/login" novalidate>
+					<h2 class="form-signin-heading">Please sign in</h2>
+					<div class="alert alert-danger" role="alert">Invalid
+						credentials</div>
+						
+						<p class="h4 mb-4">Log in</p>
+
+					<div class="form-group">
+						<label for="username" class="sr-only">Username</label>
+						<input type="text" class="form-control mb-4 w-50 mx-auto"
+							id="username" placeholder="Email" name="username" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$">
+						<div class="valid-feedback"></div> 
+						<div class="invalid-feedback">Please enter a valid email.</div>
+					</div>
+						
+					
+					<div class="form-group">
+						<label for="password" class="sr-only">Password</label>
+						<input type="password" class="form-control mb-4 w-50 mx-auto"
+							id="password" placeholder="Password" name="password" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,12}$">
+						<div class="valid-feedback"></div>
+						<div class="invalid-feedback">Invalid password</div>
+					</div>
+					
+					<div class="form-group invalid-feedback" th:text="${errorMsg}"></div>
+
+
+
+					<!-- Sign in button -->
+					<button class="btn btn-primary my-4" type="submit">Sign in</button>
+
+					<!-- Register -->
+					<p>
+						Don't have an account? <a href="">Register</a>
+					</p>
+				</form>
+			</div>
+		</div>
+		<!-- Default form login -->
+	</div>
+
+</body>
+</html>
