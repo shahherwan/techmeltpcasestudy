@@ -22,25 +22,34 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private DataSource dataSource;
-
+	
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		
+		/*
+		 * If using a schema with different column names,
+		 * Append the following code after .datasource():
+		  
+		          	.usersByUsernameQuery("select username, password, enabled"
+									   + " from users where username=?")
+        			.authoritiesByUsernameQuery("select username, authority"
+        							   + " from authorities where username=?")
+        							   
+		 */
 
 		auth.jdbcAuthentication().dataSource(dataSource)
-        .usersByUsernameQuery("select username, password, enabled"
-        					+ " from users where username=?")
-        .authoritiesByUsernameQuery("select username, authority "
-        							+ "from authorities where username=?")
         .passwordEncoder(new BCryptPasswordEncoder());
 	}
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.authorizeRequests()
+				.antMatchers("/h2-console/**", "/register", "login").permitAll()
 	      		.anyRequest().authenticated()
 	      .and()
 	      		.formLogin()
-	      			.loginPage("/login").permitAll()
+	      			.loginPage("/login").permitAll();
 //	      			.usernameParameter("email").passwordParameter("password")
 
 				 
@@ -61,9 +70,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //		 httpSecurity.authorizeRequests().anyRequest().hasAnyRole("ADMIN", "USER")
 //		    .and()
 //			    .httpBasic()
-		    .and()
-		    	.csrf();
-		 httpSecurity.csrf().disable();
+//		    .and()
+//		    	.csrf();
+//		 httpSecurity.csrf().disable();
 		 httpSecurity.headers().frameOptions().disable();
 
 		
