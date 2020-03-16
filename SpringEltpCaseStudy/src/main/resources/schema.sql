@@ -5,16 +5,15 @@ CREATE TABLE EMPLOYEES (
   last_name VARCHAR(50) DEFAULT NULL
 );
 
-CREATE TABLE USERS(
-	username VARCHAR(50) NOT NULL PRIMARY,
-	password varchar(100) NOT NULL,
-	enabled BOOLEAN NOT NULL
+create table users(
+	username varchar_ignorecase(50) not null primary key,
+	password varchar(60) not null,
+	enabled boolean not null
 );
 
-CREATE TABLE AUTHORITIES (
-	username VARCHAR(50) NOT NULL,
-	authority VARCHAR(50) NOT NULL,
-	CONSTRAINT fk_authorities_users FOREIGN KEY(username) REFERENCES USERS(username)
+create table authorities (
+	username varchar_ignorecase(50) not null,
+	authority varchar_ignorecase(50) not null,
+	constraint fk_authorities_users foreign key(username) references users(username)
 );
-
-CREATE UNIQUE INDEX ix_auth_username on authorities (username,authority);
+create unique index ix_auth_username on authorities (username,authority);

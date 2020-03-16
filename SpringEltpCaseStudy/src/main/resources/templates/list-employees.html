@@ -50,10 +50,8 @@ i {
 					<li class="nav-item active"><a class="nav-link" href="#">About</a>
 					</li>
 				</ul>
-				<span class="navbar-text" th:text="${loggedInAs}"></span> <span
-					class="navbar-text"> <a href="#loginModal"
-					data-toggle="modal"><i class="fa fa-sign-in"></i>Login</a>
-				</span>
+				<span class="navbar-text mr-5" th:text="${loggedInAs}"></span>
+				<span class="navbar-text" sec:authorize="isAuthenticated()"><a href="/logout" data-toggle="modal"><i class="fa fa-sign-out"></i>Logout</a></span>
 			</div>
 		</nav>
 		<div class="card">

@@ -61,13 +61,11 @@ i {
 					<li class="nav-item active"><a class="nav-link" href="#">Home
 							<span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item active"><a class="nav-link" href="#">About</a>
+					<li class="nav-item"><a class="nav-link" href="#">About</a>
 					</li>
 				</ul>
-				<span class="navbar-text" th:text="${loggedInAs}"></span> <span
-					class="navbar-text"> <a href="#loginModal"
-					data-toggle="modal"><i class="fa fa-sign-in"></i>Login</a>
-				</span>
+				<span class="navbar-text" th:text="${loggedInAs}"></span>
+				<!-- <span class="navbar-text"><a href="/logout" data-toggle="modal"><i class="fas fa-sign-out-alt"></i>Logout</a></span> -->
 			</div>
 		</nav>
 
@@ -77,15 +75,15 @@ i {
 
 				<form class="form-signin text-center border border-light p-5 needs-validation" method="post" action="/login" novalidate>
 					<h2 class="form-signin-heading">Please sign in</h2>
-					<div class="alert alert-danger" role="alert">Invalid
-						credentials</div>
+					
+					<div th:if="${loginError}" class="alert alert-danger mb-4 w-50 mx-auto" role="alert">Invalid Credentials</div>
 						
 						<p class="h4 mb-4">Log in</p>
 
 					<div class="form-group">
 						<label for="username" class="sr-only">Username</label>
 						<input type="text" class="form-control mb-4 w-50 mx-auto"
-							id="username" placeholder="Email" name="username" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$">
+							id="username" placeholder="Email" name="username" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" autofocus>
 						<div class="valid-feedback"></div> 
 						<div class="invalid-feedback">Please enter a valid email.</div>
 					</div>
@@ -99,7 +97,7 @@ i {
 						<div class="invalid-feedback">Invalid password</div>
 					</div>
 					
-					<div class="form-group invalid-feedback" th:text="${errorMsg}"></div>
+
 
 
 
@@ -108,7 +106,7 @@ i {
 
 					<!-- Register -->
 					<p>
-						Don't have an account? <a href="">Register</a>
+						Don't have an account? <a href="/register">Register</a>
 					</p>
 				</form>
 			</div>

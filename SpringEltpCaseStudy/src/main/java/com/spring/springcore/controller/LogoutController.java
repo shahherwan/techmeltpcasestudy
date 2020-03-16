@@ -1,28 +1,12 @@
 package com.spring.springcore.controller;
 
-import java.security.Principal;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
-/**
- * 
- * Controller for user logins.
- * <p>
- *  This controller is mapped to "/login",
- *  which can be accessed through localhost:<port>/login
- *  <p>
- * 
- * @author Nazreen Misrawi
- *
- */
 @Controller
-@RequestMapping("/login")
-public class LoginController {
+@RequestMapping("/logout")
+public class LogoutController {
 	
 	/**
 	 * 
@@ -54,13 +38,14 @@ public class LoginController {
 	 * 		loginPage
 	 */
 	@RequestMapping
-	public String loginProcess(Model model, String error, String logout) {
+	public String logoutProcess(Model model, String error, String logout) {
 		if (error != null) {
-			model.addAttribute("loginError", true);
+			model.addAttribute("errorMsg", "Invalid credentials");
 		}
 		if (logout != null) {
 			model.addAttribute("msg", "You have been logged out successfully.");
 		}
 		return "loginPage";
 	}
+
 }
