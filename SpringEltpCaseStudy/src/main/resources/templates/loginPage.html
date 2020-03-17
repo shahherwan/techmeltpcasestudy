@@ -58,10 +58,10 @@ i {
 			</button>
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active"><a class="nav-link" href="#">Home
+					<li class="nav-item active"><a class="nav-link" href="/">Home
 							<span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">About</a>
+					<li class="nav-item"><a class="nav-link" href="/">About</a>
 					</li>
 				</ul>
 				<span class="navbar-text" th:text="${loggedInAs}"></span>
@@ -74,11 +74,10 @@ i {
 			<div class="card-body">
 
 				<form class="form-signin text-center border border-light p-5 needs-validation" method="post" action="/login" novalidate>
-					<h2 class="form-signin-heading">Please sign in</h2>
+					<h2 class="form-signin-heading">Log In</h2>
 					
 					<div th:if="${loginError}" class="alert alert-danger mb-4 w-50 mx-auto" role="alert">Invalid Credentials</div>
-						
-						<p class="h4 mb-4">Log in</p>
+					<div th:if="${logoutMsg}" class="alert alert-info mb-4 w-50 mx-auto" role="alert">Logged out successfully</div>
 
 					<div class="form-group">
 						<label for="username" class="sr-only">Username</label>

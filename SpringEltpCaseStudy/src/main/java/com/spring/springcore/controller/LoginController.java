@@ -59,7 +59,7 @@ public class LoginController {
 			model.addAttribute("loginError", true);
 		}
 		if (logout != null) {
-			model.addAttribute("msg", "You have been logged out successfully.");
+			model.addAttribute("logoutMsg", true);
 		}
 		return "loginPage";
 	}

@@ -1,8 +1,12 @@
+DROP TABLE IF EXISTS employees;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS authorities;
+
 CREATE TABLE EMPLOYEES (
   id INT AUTO_INCREMENT  PRIMARY KEY,
-  email VARCHAR(50) DEFAULT NULL,
-  first_name VARCHAR(50) DEFAULT NULL,
-  last_name VARCHAR(50) DEFAULT NULL
+  email VARCHAR(50) NOT NULL,
+  first_name VARCHAR(50) NOT NULL,
+  last_name VARCHAR(50) NOT NULL
 );
 
 create table users(
@@ -17,3 +21,4 @@ create table authorities (
 	constraint fk_authorities_users foreign key(username) references users(username)
 );
 create unique index ix_auth_username on authorities (username,authority);
+create unique index ix_email on employees (email)
