@@ -7,6 +7,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * 
+ *  @author Nazreen Misrawi
+ * 
+ *  The Employee entity representing each employee
+ *  in the employees table.
+ *  <p>
+ *  Contains the same columns as the employees table.
+ *
+ */
+
 @Entity
 @Table(name = "EMPLOYEES")
 public class Employee {

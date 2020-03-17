@@ -37,11 +37,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.authorizeRequests()
+				.antMatchers("/h2-console/*", "/login", "/register").permitAll()
 	      		.anyRequest().authenticated()
 	      .and()
 	      		.formLogin()
 	      			.loginPage("/login").permitAll()
 //	      			.usernameParameter("email").passwordParameter("password")
+	      .and()
+	      	  .logout()
+			      .logoutUrl("/logout")
+			      .invalidateHttpSession(true)
+			      .deleteCookies("JSESSIONID")
 
 				 
 //		 httpSecurity.authorizeRequests()

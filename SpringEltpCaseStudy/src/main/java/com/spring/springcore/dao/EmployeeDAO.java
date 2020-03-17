@@ -7,6 +7,3 @@ import com.spring.springcore.entity.Employee;
 public interface EmployeeDAO extends JpaRepository<Employee, Integer>{
 
 }
-
-
-// test
