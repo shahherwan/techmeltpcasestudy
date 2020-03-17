@@ -1,6 +1,7 @@
 package com.spring.springcore.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.springcore.dao.EmployeeDAO;
 import com.spring.springcore.entity.Employee;
+import com.spring.springcore.exception.EmployeeNotFoundException;
 
 /**
  * 
@@ -50,6 +52,38 @@ public class EmployeeService{
 	@Transactional
 	public List<Employee> getEmployees() {
 		return employeeDAO.findAll();
+	}
+	
+	//Update on employee
+	@Transactional
+	public Employee updateEmployee(long id, Employee entity) {
+		Optional<Employee> employee = employeeDAO.findById(id);
+
+		if (employee.isPresent()) {
+			Employee newEmp = employee.get();
+			newEmp.setEmail(entity.getEmail());
+			newEmp.setFirst_name(entity.getFirst_name());
+			newEmp.setLast_name(entity.getLast_name());
+			newEmp = employeeDAO.save(newEmp);
+			return newEmp;
+		}
+//		return employee.get();
+		else {
+			entity = employeeDAO.save(entity);
+
+			return entity;
+		}
+	}
+
+	// return employee list
+	public Employee getEmployeeById(Long id) throws EmployeeNotFoundException {
+		Optional<Employee> employee = employeeDAO.findById(id);
+
+		if (employee.isPresent()) {
+			return employee.get();
+		} else {
+			throw new EmployeeNotFoundException("No employee record exist for given id");
+		}
 	}
 
 }
