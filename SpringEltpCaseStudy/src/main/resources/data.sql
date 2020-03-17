@@ -2,10 +2,8 @@ INSERT INTO
     EMPLOYEES (first_name, last_name, email) 
 VALUES
       ('Sree', 'Krishna','jsk@gmail.com'),
-      ('Sriman', 'Narayana', 'smn@email.com');
-      
- -- User admin/admin123
- -- User user/password123
+      ('Sriman', 'Narayana', 'smn@email.com'); 
+ 
 INSERT INTO 
     USERS (username, password, enabled)
 VALUES
@@ -17,3 +15,8 @@ INSERT INTO
  VALUES
       ('admin@email.com', 'ROLE_ADMIN'),
       ('user@email.com', 'ROLE_USER');
+      
+      
+      
+ -- Admin User admin@email.com/admin123
+ -- Normal User user@email.com/password123
