@@ -61,7 +61,7 @@ i {
 							<a href="/edit" class="btn btn-primary"> <i
 								class="fas fa-user-plus ml-2"> Add Employee </i></a>
 						</p> -->
-					<form th:action="@{/edit}" method="post">
+					<form th:action="@{/add}" method="post">
 						<button class="btn btn-primary fas fa-user-plus ml-2">Add
 							Employee</button>
 					</form>
@@ -85,9 +85,6 @@ i {
 									<td th:text="${employee.last_name}"></td>
 									<td th:text="${employee.email}"></td>
 									<td>
-										<!-- <a th:href="@{/edit/{id}(id=${employee.id})}" class="btn btn-primary">
-												<i class="fas fa-user-edit ml-2"></i>
-											</a> -->
 										<form th:action="@{/edit/{id}(id=${employee.id})}"
 											method="post">
 											<button class="btn btn-primary fa fa-edit ml-2"></button>
