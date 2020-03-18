@@ -39,10 +39,9 @@ public class Employee {
 		super();
 	}
 
-	public Employee(long id, String first_name, String last_name, String email, String role, String username,
+	public Employee(String first_name, String last_name, String email, String role, String username,
 			String password) {
 		super();
-		this.id = id;
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.email = email;
