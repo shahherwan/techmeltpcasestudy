@@ -9,16 +9,15 @@ CREATE TABLE EMPLOYEES (
   last_name VARCHAR(50) NOT NULL
 );
 
-create table users(
-	username varchar_ignorecase(50) not null primary key,
-	password varchar(60) not null,
-	enabled boolean not null
+create table user(
+	id bigint AUTO_INCREMENT primary key,
+	firstname varchar(30) not null,
+	lastname varchar(30) not null,
+	username varchar(30) not null,
+	password varchar(60) not null
 );
 
-create table authorities (
-	username varchar_ignorecase(50) not null,
-	authority varchar_ignorecase(50) not null,
-	constraint fk_authorities_users foreign key(username) references users(username)
+create table role(
+    id bigint not null primary key,
+    role varchar(10) not null
 );
-create unique index ix_auth_username on authorities (username,authority);
-create unique index ix_email on employees (email)

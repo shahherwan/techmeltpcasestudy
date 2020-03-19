@@ -99,4 +99,8 @@ public class EmployeeService {
 			return entity;
 		}
 
+	public void save(Employee newEmployee) {
+		employeeDAO.save(newEmployee);
+	}
+
 }
