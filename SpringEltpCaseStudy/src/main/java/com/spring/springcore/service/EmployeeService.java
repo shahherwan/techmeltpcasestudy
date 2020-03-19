@@ -86,4 +86,8 @@ public class EmployeeService{
 		}
 	}
 
+	public void save(Employee newEmployee) {
+		employeeDAO.save(newEmployee);
+	}
+
 }

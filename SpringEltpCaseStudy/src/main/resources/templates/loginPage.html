@@ -61,8 +61,7 @@ i {
 					<li class="nav-item active"><a class="nav-link" href="/">Home
 							<span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="/">About</a>
-					</li>
+					<li class="nav-item"><a class="nav-link" href="/">About</a></li>
 				</ul>
 				<span class="navbar-text" th:text="${loggedInAs}"></span>
 				<!-- <span class="navbar-text"><a href="/logout" data-toggle="modal"><i class="fas fa-sign-out-alt"></i>Logout</a></span> -->
@@ -73,29 +72,47 @@ i {
 		<div class="card shadow-lg">
 			<div class="card-body">
 
-				<form class="form-signin text-center border border-light p-5 needs-validation" method="post" action="/login" novalidate>
+				<form
+					class="form-signin text-center border border-light p-5 needs-validation"
+					method="post" action="/login" novalidate>
 					<h2 class="form-signin-heading">Log In</h2>
-					
-					<div th:if="${loginError}" class="alert alert-danger mb-4 w-50 mx-auto" role="alert">Invalid Credentials</div>
-					<div th:if="${logoutMsg}" class="alert alert-info mb-4 w-50 mx-auto" role="alert">Logged out successfully</div>
+					<br/>
+					<div th:if="${loginError}"
+						class="alert alert-danger mb-4 w-50 mx-auto" role="alert">Invalid
+						Credentials</div>
+					<div th:if="${logoutMsg}"
+						class="alert alert-info mb-4 w-50 mx-auto" role="alert">Logged
+						out successfully</div>
 
 					<div class="form-group">
 						<label for="username" class="sr-only">Username</label>
-						<input type="text" class="form-control mb-4 w-50 mx-auto"
-							id="username" placeholder="Email" name="username" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" autofocus>
-						<div class="valid-feedback"></div> 
+						<!-- <input
+							type="text" class="form-control mb-4 w-50 mx-auto" id="email"
+							placeholder="Email" name="email" required
+							pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+							autofocus> -->
+						<div class="input-group mb-3 w-50 mx-auto">
+							<input type="text" class="form-control"
+								 id="email"
+							placeholder="Username" name="username" required autofocus>
+							<div class="input-group-append">
+								<span class="input-group-text" id="basic-addon2">@company.com</span>
+							</div>
+						</div>
+						<div class="valid-feedback"></div>
 						<div class="invalid-feedback">Please enter a valid email.</div>
 					</div>
-						
-					
+
+
 					<div class="form-group">
-						<label for="password" class="sr-only">Password</label>
-						<input type="password" class="form-control mb-4 w-50 mx-auto"
-							id="password" placeholder="Password" name="password" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,12}$">
+						<label for="password" class="sr-only">Password</label> <input
+							type="password" class="form-control mb-4 w-50 mx-auto"
+							id="password" placeholder="Password" name="password" required
+							pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,12}$">
 						<div class="valid-feedback"></div>
 						<div class="invalid-feedback">Invalid password</div>
 					</div>
-					
+
 
 
 
