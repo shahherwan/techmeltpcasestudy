@@ -76,11 +76,6 @@ public class RegisterController {
 
 		} else {
 			userService.save(user);
-			Employee newEmployee = new Employee();
-			newEmployee.setEmail(user.getUsername());
-			newEmployee.setFirst_name(user.getFirst_name());
-			newEmployee.setLast_name(user.getLast_name());
-			employeeService.save(newEmployee);
 			model.addAttribute("successMessage", "User has been registered successfully");
 //			model.addObject("user", new User());
 //			model.setViewName("register");
