@@ -4,12 +4,12 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
+import java.security.Principal;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,28 +22,25 @@ import com.spring.springcore.exception.EmployeeNotFoundException;
 import com.spring.springcore.service.EmployeeService;
 
 /**
- *  Main Controller for the application.
- *  <p>
- *  This controller's default mapping is "/", 
- *  which accessed through localhost:<port>/
- *  
- *  @author
- *  	Nazreen Misrawi
+ * Main Controller for the application.
+ * <p>
+ * This controller's default mapping is "/", which accessed through
+ * localhost:<port>/
+ * 
+ * @author Nazreen Misrawi
  */
 
 @Controller
 @RequestMapping("/")
 public class EmployeeController {
-	
 	/**
-	 *  Autowire the EmployeeService.
-	 *  <p>
-	 *  This will be used to access the Employee DAO
-	 *  
-	 *  @author
-	 *  	Nazreen Misrawi
+	 * Autowire the EmployeeService.
+	 * <p>
+	 * This will be used to access the Employee DAO
+	 * 
+	 * @author Nazreen Misrawi
 	 */
-	
+
 	@Autowired
 	EmployeeService service;
 	
@@ -64,6 +61,7 @@ public class EmployeeController {
 	 *  @param principal Principal stores the information of the current authenticated user.
 	 *  @return Returns the view list-employees
 	 */
+	
 	@GetMapping
 	public String getAllEmployees(Model model, Principal principal) {
 		List<Employee> list = service.getEmployees();
@@ -87,23 +85,35 @@ public class EmployeeController {
 		if (id.isPresent()) {
 			Employee entity = service.getEmployeeById(id.get());
 			model.addAttribute("employee", entity);
-			service.updateEmployee(entity.getId(), entity);
 		} else {
 			model.addAttribute("employee", new Employee());
 		}
-		
+
 		return "edit-employee";
 	}
+	//Naz
+	@RequestMapping(value="/edit/save")    
+    public String editsave(@ModelAttribute("employee") Employee employee){    
+        service.updateEmployee(employee.getId(), employee);
+        return "redirect:/";    
+    }
+
+	// Working For Delete
+	@RequestMapping(path = "/delete/{id}")
+	public String deleteEmployeeById(Model model, @PathVariable("id") Long id) throws EmployeeNotFoundException {
+		service.deleteEmployeeById(id);
+		return "redirect:/";
+	}
 	
-//	@RequestMapping("/register/process")
-//	public String registerEmployee() {
-//		jdbcUserDetailsManager.createUser(
-//				User.withUsername("test@email.com")
-//					.password(passwordEncoder.encode("testtest123"))
-//					.roles("USER").build());
-//		return "redirect:/";
-//	}
-	
-	
-	
+	//add
+	@RequestMapping("/add")
+	public String addEmployeeById() throws EmployeeNotFoundException {
+		return "add-employee";
+	}
+	//add
+	@RequestMapping(value="/add/save")    
+    public String addSave(@ModelAttribute("employee") Employee employee){    
+        service.addEmployee(employee);
+        return "redirect:/";    
+    }
 }
