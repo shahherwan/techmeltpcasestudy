@@ -69,10 +69,12 @@ public class Employee {
 	}
 
 	public void setFirst_name(String first_name) {
+		first_name = first_name.substring(0,1).toUpperCase() + first_name.substring(1).toLowerCase();
 		this.first_name = first_name;
 	}
 
 	public void setLast_name(String last_name) {
+		last_name = last_name.substring(0,1).toUpperCase() + last_name.substring(1).toLowerCase();
 		this.last_name = last_name;
 	}
 

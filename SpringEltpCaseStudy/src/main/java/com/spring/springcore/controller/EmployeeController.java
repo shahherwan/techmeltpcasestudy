@@ -66,23 +66,15 @@ public class EmployeeController {
 	@GetMapping
 	public String getAllEmployees(Model model, Principal principal) {
 		List<Employee> list = service.getEmployees();
-//		UserDetails user = jdbcUserDetailsManager.loadUserByUsername("admin@email.com");
-//		System.out.println(user);
-		
 		model.addAttribute("employees", list);
 		model.addAttribute("loggedInAs", "You are logged in as " + principal.getName());
 		return "list-employees";
 	}
 
-//	// Edit
-//	@PostMapping("/edit")
-//	public String editEmployee() {
-//		return "redirect:/";
-//	}
-
 	// Edit
 	@PostMapping("/edit/{id}")
-	public String editEmployeeById(Model model, @PathVariable("id") Optional<Long> id) throws EmployeeNotFoundException {
+	public String editEmployeeById(Model model, @PathVariable("id") Optional<Long> id, Principal principal) throws EmployeeNotFoundException {
+		model.addAttribute("loggedInAs", "You are logged in as " + principal.getName());
 		if (id.isPresent()) {
 			Employee entity = service.getEmployeeById(id.get());
 			model.addAttribute("employee", entity);
@@ -108,7 +100,8 @@ public class EmployeeController {
 	
 	//add
 	@RequestMapping("/add")
-	public String addEmployeeById() throws EmployeeNotFoundException {
+	public String addEmployeeById(Model model, Principal principal) throws EmployeeNotFoundException {
+		model.addAttribute("loggedInAs", "You are logged in as " + principal.getName());
 		return "add-employee";
 	}
 	//add
