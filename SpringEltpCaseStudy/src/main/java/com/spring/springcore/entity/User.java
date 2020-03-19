@@ -34,7 +34,6 @@ public class User {
     
     @Column(name = "username", unique = true)
     @NotEmpty
-    @Email
     private String username;
     
     @Column(name = "password")
