@@ -9,6 +9,27 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+
+<script>
+	// Disable form submissions if there are invalid fields
+	(function() {
+		'use strict';
+		window.addEventListener('load', function() {
+			// Get the forms we want to add validation styles to
+			var forms = document.getElementsByClassName('needs-validation');
+			// Loop over them and prevent submission
+			var validation = Array.prototype.filter.call(forms, function(form) {
+				form.addEventListener('submit', function(event) {
+					if (form.checkValidity() === false) {
+						event.preventDefault();
+						event.stopPropagation();
+					}
+					form.classList.add('was-validated');
+				}, false);
+			});
+		}, false);
+	})();
+</script>
 </head>
 
 <body>
@@ -32,45 +53,70 @@
 			</div>
 		</nav>
 		<div class="container my-5">
-			<h3>Register Employee</h3>
+			<h3>Register User</h3>
 			<div class="card">
 				<div class="card-body">
-					<div class="col-md-10">
-						<form action="#" th:action="@{/register}" th:object="${employee}"
-							method="post">
-							<div class="row">
-								<div class="form-group col-md-8">
-									<label for="name" class="col-form-label">Enter First Name</label> <input
-										type="text" name="first_name" class="form-control"
-										id="first_name" placeholder="First Name" />
-								</div>
-								<div class="form-group col-md-8">
-									<label for="name" class="col-form-label">Enter Last Name</label> <input
-										type="text" name="last_name" class="form-control"
-										id="last_name" placeholder="Last Name" />
-								</div>
-								<div class="form-group col-md-8">
-									<label for="username" class="col-form-label">Enter Username</label> <input
-										type="text" name="username" class="form-control" id="username"
-										placeholder="Username" />
-								</div>
-								<div class="form-group col-md-8">
-									<label for="password" class="col-form-label">EnterPassword</label> <input
-										type="password" name="password" class="form-control" id="password"
-										placeholder="Password" />
-								</div>
-								<div class="form-group col-md-8">
-									<label for="password" class="col-form-label">Confirm Password</label> <input
-										type="password" name="passwordConfirm" class="form-control" id="passwordConfirm"
-										placeholder="Confirm Password" />
-								</div>
-								<div class="col-md-6">
-									<input type="submit" class="btn btn-primary" value=" Submit ">
-								</div>
+
+					<form class="needs-validation" th:action="@{/register}"
+						th:object="${user}" method="post" novalidate>
+						<div th:if="${registrationSuccess}"
+							class="alert alert-success mb-4 w-50 " role="alert">User
+							Registration Successful</div>
+						<div th:if="${usernameError}"
+							class="alert alert-danger mb-4 w-50 " role="alert">User registration unsuccessful. Username already exists</div>
+						<div th:if="${passwordMatchError}"
+							class="alert alert-danger mb-4 w-50 " role="alert">User registration unsuccessful. Passwords do not match</div>
+
+						<div class="row">
+							<div class="form-group col-md-8">
+								<label for="name" class="col-form-label">Enter First
+									Name</label> <input type="text" name="first_name" class="form-control"
+									id="first_name" placeholder="First Name" required
+									pattern="[a-zA-Z]{2,20}" />
+								<div class="valid-feedback"></div>
+								<div class="invalid-feedback">Please enter first name.</div>
+							</div>
+							<div class="form-group col-md-8">
+								<label for="name" class="col-form-label">Enter Last Name</label>
+								<input type="text" name="last_name" class="form-control"
+									id="last_name" placeholder="Last Name" required />
+								<div class="valid-feedback"></div>
+								<div class="invalid-feedback">Please enter last name.</div>
+							</div>
+							<div class="form-group col-md-8">
+								<label for="username" class="col-form-label">Enter
+									Username</label> <input type="text" name="username"
+									class="form-control" id="username" placeholder="Username"
+									required pattern="[a-zA-Z]{2,20}" />
+								<div class="valid-feedback"></div>
+								<div class="invalid-feedback">Please enter a username.</div>
 
 							</div>
-						</form>
-					</div>
+							<div class="form-group col-md-8">
+								<label for="password" class="col-form-label">EnterPassword</label>
+								<input type="password" name="password" class="form-control"
+									id="password" placeholder="Password" required
+									pattern="^(?=.*\d)(?=.*[a-zA-Z]).{8,12}$" />
+								<div class="valid-feedback"></div>
+								<div class="invalid-feedback">Password should contain at
+									least 1 number and 8-12 characters long.</div>
+							</div>
+							<div class="form-group col-md-8">
+								<label for="password" class="col-form-label">Confirm
+									Password</label> <input type="password" name="passwordConfirm"
+									class="form-control" id="passwordConfirm"
+									placeholder="Confirm Password" required
+									pattern="^(?=.*\d)(?=.*[a-zA-Z]).{8,12}$" />
+								<div class="valid-feedback"></div>
+								<div class="invalid-feedback">Password should contain at
+									least 1 number and 8-12 characters long.</div>
+							</div>
+							<div class="col-md-8">
+								<input type="submit" class="btn btn-primary" value=" Register ">
+							</div>
+
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>

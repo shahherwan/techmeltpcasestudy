@@ -37,8 +37,8 @@ public class RegisterController {
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	private EmployeeService employeeService;
+//	@Autowired
+//	private EmployeeService employeeService;
 
 	/**
 	 * 
@@ -64,22 +64,16 @@ public class RegisterController {
 //	}
 
 	@PostMapping
-	public String createNewUser(Model model, @Valid User user, BindingResult bindingResult) {
-		System.out.println(bindingResult);
+	public String createNewUser(Model model, @Valid User user) {
 		User userExists = userService.findByUsername(user.getUsername());
 		if (userExists != null) {
-			bindingResult.rejectValue("username", "error.user",
-					"There is already a user registered with the email provided");
-			
-			model.addAttribute("errorMessage", "There is already a user with the registered email provided.");
-			System.out.println(userExists);
+			model.addAttribute("usernameError", true);
 
+		} else if(!user.getPassword().contentEquals(user.getPasswordConfirm())) {
+			model.addAttribute("passwordMatchError", true);
 		} else {
 			userService.save(user);
-			model.addAttribute("successMessage", "User has been registered successfully");
-//			model.addObject("user", new User());
-//			model.setViewName("register");
-
+			model.addAttribute("registrationSuccess", true);
 		}
 		return "register";
 	}
